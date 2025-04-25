@@ -68,22 +68,29 @@ var Game = (function() {
             // window.requestAnimationFrame(this.update.bind(this));
         // },
 		
-		update: function() {
-		// 移除 requestAnimationFrame，改為 setInterval 來控制時間更新
-		this.updateTime();  // 這個是立即更新一次
-		setInterval(this.updateTime.bind(this), 1000); // 每 1000 毫秒（1秒）更新一次
-}
+update: function() {
+    // 初始化倒數計時
+    this.updateTime();
+    // 使用 setInterval 每秒更新一次時間
+	console.log("Q")
+    setInterval(() => {
+        this.updateTime();  // 每秒更新一次
+    }, 1000);
+},
+
 
 		
         updateTime: function() {
             if (!gWin) {
 
-                timeCooldown--;
-                if (!timeCooldown) {
-                    timeCooldown = 60;
-                    data.time--;
-                    this.view.updateTime(data.time);
-                }
+                data.time--;
+                this.view.updateTime(data.time);
+                // timeCooldown--;
+                // if (!timeCooldown) {
+                    // timeCooldown = 60;
+                    // data.time--;
+                    // this.view.updateTime(data.time);
+                // }
                 if (data.time === 0) {
                     this.over();
                 }
