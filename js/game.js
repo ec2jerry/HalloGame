@@ -61,13 +61,20 @@ var Game = (function() {
             }
         },
 
-        update: function() {
+        // update: function() {
 
-            this.updateTime();
+            // this.updateTime();
 
-            window.requestAnimationFrame(this.update.bind(this));
-        },
+            // window.requestAnimationFrame(this.update.bind(this));
+        // },
+		
+		update: function() {
+		// 移除 requestAnimationFrame，改為 setInterval 來控制時間更新
+		this.updateTime();  // 這個是立即更新一次
+		setInterval(this.updateTime.bind(this), 1000); // 每 1000 毫秒（1秒）更新一次
+}
 
+		
         updateTime: function() {
             if (!gWin) {
 
