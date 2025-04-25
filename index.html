@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/style.css">
+
+    <meta property="og:site_name" content="Happy Halloween!" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="萬聖節連連看"/>
+    <meta property="og:description" content="連連看相同的兩張圖片，用三根以內的直線連起來就能消除。" />
+    <meta property="og:image" content="https://hallogame.herokuapp.com/bg/index.jpg" />
+    <title>萬聖節連連看</title>
+</head>
+
+
+<body id="body" style="background-color:rgb(180,164,138)">
+    <div id="container" class="container" style="display:none">
+        <div id="heading" class="heading" style="display:none;padding-top:15px">
+            <p class="time"></p>
+            <button id="q" class="btn">❔</button>
+            <button id="help" class="btn">Help(3)</button>
+            <button id="restart" class="btn">重新挑戰</button>
+        </div>
+        <div id="grid">
+            <div class="grid-container" style="margin-bottom:200px"></div>
+        </div>
+    </div>
+    <script src="js/config.js"></script>
+    <script src="js/util.js"></script>
+    <script src="js/view.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/event.js"></script>
+    <script src="js/main.js"></script>
+</body>
+<img id="start" onclick="start()" src="./bg/start.png" alt="again" />
+<img id="restartimg" onclick="restartimg()" src="./bg/restart.png" style="display:none" alt="again" />
+<img id="gamemb" src="./bg/gamemb.png" style="display:none" alt="again" />
+
+</html>
+
+<style>
+    body {
+        background: rgb(255, 198, 169) url('./bg/index.jpg') no-repeat center center;
+    }
+    
+    #start {
+        height: 150px;
+        width: 300px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: 40px;
+        margin-left: -150px;
+    }
+    
+    #restartimg {
+        height: 150px;
+        width: 300px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: 40px;
+        margin-left: -150px;
+    }
+    
+    #gamemb {
+        height: 250px;
+        width: 440px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: 85px;
+        margin-left: -220px;
+    }
+</style>
+
+
+<script language="javascript">
+    function start() {　
+
+        var start = document.getElementById("start");
+        start.style.display = "none";
+
+        var body = document.getElementById("body");
+        body.style.background = "rgb(180,164,138) url('" + './bg/game.jpg' + "') no-repeat center center";
+
+        var gamemb = document.getElementById("gamemb");
+        gamemb.style.display = "flex";
+
+        var container = document.getElementById("container");
+        container.style.display = "flex";
+
+        var heading = document.getElementById("heading");
+        heading.style.display = "flex";
+
+        var grid = document.getElementById("grid");
+        this.fadeIn(grid, 500); //first argument is the element and second the animation duration in ms
+
+    }
+
+    function restartimg() {　
+
+        var restartimg = document.getElementById("restartimg");
+        restartimg.style.display = "none";
+
+        var body = document.getElementById("body");
+        body.style.background = "rgb(180,164,138) url('" + './bg/index.jpg' + "') no-repeat center center";
+
+        var start = document.getElementById("start");
+        start.style.display = "flex";
+
+        var heading = document.getElementById("heading");
+        heading.style.display = "flex";
+
+    }
+
+
+    var el = document.getElementById("grid");
+    this.fadeIn(el, 500); //first argument is the element and second the animation duration in ms
+
+    function fadeIn(el, time) {
+        el.style.opacity = 0;
+
+        var last = +new Date();
+        var tick = function() {
+            el.style.opacity = +el.style.opacity + (new Date() - last) / time;
+            last = +new Date();
+
+            if (+el.style.opacity < 1) {
+                (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16);
+            }
+        };
+
+        tick();
+    }
+</script>
